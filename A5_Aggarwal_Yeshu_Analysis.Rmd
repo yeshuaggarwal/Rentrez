@@ -1,0 +1,85 @@
+---
+title: "Analysis"
+author: "Yeshu Aggarwal"
+date: "15/02/2022"
+output: html_document
+---
+### GitHub Username: yeshuaggarwal
+### Student Name: Yeshu Aggarwal
+### Student ID: 20103933
+
+## Project Info
+
+**GitHub Link:** https://github.com/yeshuaggarwal/Rentrez.git
+
+## PART I
+
+###Import Data
+
+```{r}
+Data<-read.csv("C:/Users/yeshu/Desktop/A5_Aggarwal_Yeshu_Sequences.csv")
+```
+
+```{r}
+Data
+```
+### Count the number of each base pair (A, T, C and G), in each of the three sequences.
+
+```{r}
+Count_A<- nchar(as.character(Data$Sequence)) -nchar(gsub("A", "", Data$Sequence))
+print(Count_A)
+```
+
+```{r}
+Count_T<-nchar(as.character(Data$Sequence)) -nchar(gsub("T", "", Data$Sequence))
+print(Count_T)
+```
+```{r}
+Count_G<-nchar(as.character(Data$Sequence)) -nchar(gsub("G", "", Data$Sequence))
+print(Count_G)
+```
+
+```{r}
+Count_C<-nchar(as.character(Data$Sequence)) -nchar(gsub("C", "", Data$Sequence))
+print(Count_C)
+```
+```{r}
+library(dplyr)
+```
+
+### Print out the number of each nucleotide as a table for each of the three sequences.
+
+```{r}
+Data<- Data %>%
+  mutate(Count_A, Count_T, Count_G, Count_C)
+Data
+```
+
+### Include an image of a bacteria from the internet, and a link to the Wikipedia page about Borrelia burgdorferi.
+
+![Borrelia burgdorferi](images/image.png)
+
+Link to the Wikipedia page: https://en.wikipedia.org/wiki/Borrelia_burgdorferi
+
+### Calculate GC Content (% of nucleotides that are G or C) and create a final table showing GC content for each sequence ID.
+
+```{r}
+GC_content<- Count_G + Count_C
+GC_content
+```
+```{r}
+Total<- Count_A + Count_C + Count_T + Count_G
+Total
+```
+
+```{r}
+Data<- Data %>%
+  mutate(Sequence_ID_GC_Content = (GC_content/Total)*100)
+Data
+```
+
+
+
+
+
+

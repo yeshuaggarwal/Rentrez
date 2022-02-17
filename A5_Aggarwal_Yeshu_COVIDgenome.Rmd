@@ -1,0 +1,72 @@
+---
+title: "COVIDgenome"
+author: "Yeshu Aggarwal"
+date: "16/02/2022"
+output: html_document
+---
+
+### GitHub Username: yeshuaggarwal
+### Student Name: Yeshu Aggarwal
+### Student ID: 20103933
+
+## Project Info
+
+**GitHub Link:** https://github.com/yeshuaggarwal/Rentrez.git
+
+## PART II
+
+### Download the SARS-CoV-2 reference genome from Genbank.
+
+```{r}
+library(Biostrings)
+```
+
+```{r}
+Seq<- readDNAStringSet("C:/Users/yeshu/Desktop/GCF_009858895.2_ASM985889v3_genomic.fna.gz")
+```
+
+```{r}
+Seq
+```
+```{r}
+str(Seq)
+```
+
+### Use regular expressions in R to isolate the S protein from the genome you downloaded
+
+```{r}
+Seq@metadata
+```
+```{r}
+Seq<-unlist(str_split(Seq, "ATGTTTGTTTTTCTTGTTTA-GTCAAATTACATTACACATAA"))
+```
+
+```{r}
+Seq
+```
+
+```{r}
+Protein<-substr(Seq, 21563, 25384)
+Protein
+```
+
+### Would you say this gene is highly conserved or evolving rapidly? Why?
+
+I would say it is evolving rapidly because it has alignments with various other SARS-CoV-2 genomes. There were total of 100 hits for this one protein.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

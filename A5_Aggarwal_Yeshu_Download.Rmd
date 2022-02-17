@@ -1,0 +1,100 @@
+---
+title: "Download"
+author: "Yeshu Aggarwal"
+date: "14/02/2022"
+output: html_document
+---
+
+### GitHub Username: yeshuaggarwal
+### Student Name: Yeshu Aggarwal
+### Student ID: 20103933
+
+## Project Info
+
+**GitHub Link:** https://github.com/yeshuaggarwal/Rentrez.git
+
+## PART I
+
+### 1. Load Packages
+
+```{r}
+install.packages("rentrez")
+```
+
+```{r}
+ncbi_ids <- c("HQ433692.1","HQ433694.1","HQ433691.1")
+```
+
+###Above line of code is used to create vectors for 3 different sequences of the 16S gene of Borrelia burgdorferi (aka Borreliella burgdorferi).
+
+```{r}
+library(rentrez)
+```
+
+###Above line of code using the function library is used to load the 'rentrez' package into the R.
+
+```{r}
+Bburg<-entrez_fetch(db = "nuccore", id = ncbi_ids, rettype = "fasta")
+```
+
+###Above line of code is used to get sequences for the organism as a character vector.
+
+```{r}
+Bburg
+```
+
+```{r}
+Sequences<-strsplit(Bburg, split = "\n\n")
+print(Sequences)
+```
+
+```{r}
+Sequences<-unlist(Sequences)
+```
+
+```{r}
+header<-gsub("(^>.*sequence)\\n[ATCG].*","\\1",Sequences)
+header
+```
+
+```{r}
+seq<-gsub("^>.*sequence\\n([ATCG].*)","\\1",Sequences)
+seq
+```
+
+
+```{r}
+Sequences<-data.frame(Name=header,Sequence=seq)
+Sequences
+```
+
+### Remove the newline characters from the Sequences data frame using regular expressions
+
+```{r}
+Sequences$Sequence<-gsub("\n", "", as.character(Sequences$Sequence))
+```
+
+
+```{r}
+Sequences
+```
+
+```{r}
+Sequences$Sequence
+```
+### Output this data frame to a file called Sequences.csv
+
+```{r}
+write.csv(Sequences, "C:/Users/yeshu/Desktop/A5_Aggarwal_Yeshu_Sequences.csv", row.names = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
